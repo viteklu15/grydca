@@ -45,7 +45,7 @@
         justify-content: space-evenly;
     }
     
-    .menu .btn:active {
+    .btn:active {
         background-color: #2d2d2d;
     }
     
@@ -55,7 +55,7 @@
     
     .input_pocaz {
         color: rgb(0, 0, 0);
-        font-size: 20px;
+        /* font-size: 20px; */
         width: 60px;
         text-align: center;
     }
@@ -90,11 +90,41 @@
         .indicator {
             flex-wrap: wrap;
         }
-        .indicator>div {
+        .indicator div {
             width: 25%;
             margin-bottom: 10px;
         }
         .input_pocaz {
             width: 100%;
         }
+        .value {
+            width: 25%;
+        }
+    }
+    
+    text {
+        fill: rgb(255, 255, 255) !important;
+    }
+    
+    .decrement,
+    .increment {
+        background-color: #5f5d5d;
+        border: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        /* cursor: pointer; */
+        /* text-align: center; */
+        color: #f1f2f5;
+    }
+    
+    .plmin .activ_bt:active {
+        background-color: #2d2d2d;
+    }
+    
+    .plmin {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
     }

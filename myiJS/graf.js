@@ -5,7 +5,6 @@ $(function() {
         exportOptions: {
             image: false,
             print: false
-
         },
         axisX: {
             categoricalValues: data,
@@ -17,16 +16,16 @@ $(function() {
         },
         axisY: {
             axisTickText: {
-                format: "{text:c}",
+                // format: " {text:c}",
                 style: {
                     color: "#FFFFFF"
                 }
             },
             title: {
-                text: "Цена (EUR в kWh)",
-                style: {
-                    color: "#FFFFFF"
-                }
+                // text: "Цена (EUR в kWh)",
+                // style: {
+                // color: "#FFFFFF"
+                // }
             }
         },
         tooltipSettings: {
@@ -46,20 +45,31 @@ $(function() {
             }
         },
         primaryHeader: {
-            text: "Цены на электроэнергию",
+            text: "",
             // style: {
             // color: "#FFFFFF"
             // }
         },
         dataSeries: [{
             seriesType: 'line',
-            collectionAlias: 'Домохозяйства',
+            collectionAlias: 'Температура в нутри',
             data: [0.164, 0.173, 0.184, 0.167, 0.177, 0.189, 0.180, 0.183, 0.188, 0.160, 0.176, 0.178],
             // color: "#FFFF00"  // цыкт графика
         }, {
             seriesType: 'line',
-            collectionAlias: 'Промышленность',
+            collectionAlias: 'Температура почвы',
             data: [0.103, 0.105, 0.112, 0.111, 0.102, 0.099, 0.110, 0.113, 0.117, 0.119, 0.123, 0.117]
-        }]
+        }, {
+            seriesType: 'line',
+            collectionAlias: 'Влажность почвы',
+            data: [0.3, 0.105, 0.212, 0.111, 0.4, 0.099, 0.110, 0.113, 0.117, 0.119, 0.123, 0.117]
+        }],
+        windowResizeEnabled: function() {
+            if ($(window).width() < 1000) {
+                this.chartOptions.axisX.enabled = false;
+            } else {
+                this.chartOptions.axisX.enabled = true;
+            }
+        }
     });
 });
