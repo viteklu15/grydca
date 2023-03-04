@@ -98,7 +98,7 @@
             width: 100%;
         }
         .value {
-            width: 25%;
+            width: 15%;
         }
     }
     
@@ -127,4 +127,5 @@
         justify-content: space-evenly;
         flex-wrap: wrap;
         align-items: center;
+        margin: 0 auto;
     }
