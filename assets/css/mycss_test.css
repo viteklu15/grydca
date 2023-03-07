@@ -1,0 +1,99 @@
+@media (min-width: 300px) {
+  #voda_icon {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) {
+  #voda_icon {
+    display: flex;
+  }
+}
+
+@media (min-width: 300px) {
+  #TIME_m {
+    display: none;
+  }
+}
+
+@media (min-width: 760px) {
+  #TIME_m {
+    display: inherit;
+  }
+}
+
+#log {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 300px) {
+  #vklvkl {
+    display: none;
+  }
+}
+
+@media (min-width: 760px) {
+  #vklvkl {
+    display: inherit;
+  }
+}
+
+#setup_menu {
+  display: none;
+}
+
+@media (min-width: 300px) {
+  #stil_time {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 576px) {
+  #stil_time {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 768px) {
+  #stil_time {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1200px) {
+  #stil_time {
+    flex-wrap: nowrap;
+  }
+}
+
+#char_index {
+  /*display: none;*/
+}
+
+.poliv {
+  flex-direction: row;
+  align-items: flex-end;
+  /*flex-wrap: wrap;*/
+  justify-content: space-evenly;
+}
+
+#div_poliv {
+  margin-top: 20px;
+  margin-left: 0px;
+}
+
+@media (min-width: 1200px) {
+  #div_poliv {
+    margin-top: 0px;
+    margin-left: 30px;
+  }
+}
+
+.poliv_clous {
+  pointer-events: all;
+  opacity: 1;
+}
+
+/* отключение при автоматическом  поливе */
+
