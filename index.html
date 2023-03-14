@@ -55,7 +55,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2" style="padding-right: 5px;">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1" style="padding-right: 0px;"><span>Температура внутри</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_vhutri">40,00°C<br></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_vhutri">00,00°C<br></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
                                     </div>
@@ -68,7 +68,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Температура почвы</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_pohvu">25,12°C<br></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_pohvu">00,12°C<br></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
                                     </div>
@@ -81,7 +81,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Влажность воздуха<br></span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="h_pohva">40,00%<br></span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span id="h_pohva">00,00%<br></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-percent fa-2x text-gray-300"></i></div>
                                     </div>
@@ -109,13 +109,13 @@
                                     <h6 class="text-primary fw-bold m-0">График показаний&nbsp;</h6>
                                     <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                         <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                            <p class="text-center dropdown-header">Меню</p><a class="dropdown-item" href="#">тест</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a><span class="dropdown-item-text">Text Item</span>
+                                            <p class="text-center dropdown-header">управление графиком</p>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" id="chart_segodhy" href="#">Сегодня</a><a class="dropdown-item" id="chart_3dey" href="#">За 3 дня</a><a class="dropdown-item" id="chart_10dey" href="#">За 10 дней</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;01-03-23&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;re&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Темп. в нутри&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;26&quot;,&quot;30&quot;,&quot;15&quot;,&quot;-15&quot;,&quot;0&quot;,&quot;23&quot;,&quot;-10&quot;,&quot;32&quot;,&quot;2&quot;],&quot;backgroundColor&quot;:&quot;rgba(228,21,58,0.05)&quot;,&quot;borderColor&quot;:&quot;rgb(187,16,26)&quot;},{&quot;label&quot;:&quot;Темп. почвы&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;34&quot;,&quot;2&quot;,&quot;10&quot;,&quot;5&quot;,&quot;3&quot;,&quot;6&quot;,&quot;0&quot;,&quot;3&quot;,&quot;-4&quot;],&quot;backgroundColor&quot;:&quot;rgba(28,200,138,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1cc88a&quot;},{&quot;label&quot;:&quot;Влажность&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;34&quot;,&quot;2&quot;,&quot;10&quot;,&quot;5&quot;,&quot;3&quot;,&quot;6&quot;,&quot;0&quot;,&quot;3&quot;,&quot;-4&quot;],&quot;backgroundColor&quot;:&quot;rgba(31,28,200,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1a21d9&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;,&quot;fontFamily&quot;:&quot;Nunito, sans-serif&quot;},&quot;position&quot;:&quot;bottom&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;,&quot;display&quot;:false},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;4&quot;],&quot;zeroLineBorderDash&quot;:[&quot;4&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}]}}}"></canvas></div>
+                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Темп. в нутри&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(228,21,58,0.05)&quot;,&quot;borderColor&quot;:&quot;rgb(187,16,26)&quot;},{&quot;label&quot;:&quot;Темп. почвы&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(28,200,138,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1cc88a&quot;},{&quot;label&quot;:&quot;Влажность&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(31,28,200,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1a21d9&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;position&quot;:&quot;bottom&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;,&quot;display&quot;:false},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;1&quot;],&quot;zeroLineBorderDash&quot;:[&quot;1&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;1&quot;],&quot;zeroLineBorderDash&quot;:[&quot;1&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}]}}}"></canvas></div>
                                 </div>
                             </div>
                         </div>
@@ -219,6 +219,7 @@
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/myJS/Firebase_riad.js"></script>
     <script src="assets/js/myJS/funcc.js"></script>
+    <script src="assets/js/myJS/W_chart_data.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
 

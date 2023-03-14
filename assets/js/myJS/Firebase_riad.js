@@ -58,13 +58,25 @@ function riad_firebase_set(key) // функция для чтения с баз�
         });
 }
 
+function riad_firebase_graf(key) // функция для чтения с базы  показаний с датчика 
+{
+    var url = URL_BAZA + login + key + jsoncon;
+    //console.log(url);
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            data_chart(data);
+        });
+}
+
 
 
 
 if ((username != null && password != null) && (username != "" && password != "")) // проверяем есть ли в браузере логин и пароль 
 {
     console.log("login и пароль есть в браузере проверяем с базой");
-    login = username.replace(/\.[^.]+$/, ""); // убираем все что после точки 
+    //login = username.replace(/\.[^.]+$/, ""); // убираем все что после точки 
+    login = username;
     login = "/" + login;
     riad_firebasePas("/pas"); // запрос пароля в базе 
 

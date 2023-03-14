@@ -1,20 +1,26 @@
 let glavn_setup = false; // если 0 то главная если 1 то настройки 
-
+riad_firebase("/riad");
 setInterval(function() {
 
     riad_firebase("/riad");
 
+    // fill datagraf array with dates from March 1, 2023 to March 10, 2023
+    let arr = [];
+    let arrd = [];
 
-    if (!glavn_setup) //обновление графига 
-    {
-        var chartElement = document.querySelector('[data-bss-chart]');
-        var chart = chartElement.chart;
-        chart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-        chart.data.datasets[0].data = [10, 20, 30, 40, 45, 60, 70, 80, 90, 90]; // температура в нутри
-        chart.data.datasets[1].data = [10, 45, 200, 40, 45, 60, 70, 80, 90, 90]; // температура почвы 
-        chart.data.datasets[2].data = [10, 87, 30, 87, 45, 60, 70, 80, 90, 90]; // влажность 
-        chart.update();
-    }
+
+    //console.log(arr);
+
+    // if (!glavn_setup) //обновление графига 
+    // {
+    //     var chartElement = document.querySelector('[data-bss-chart]');
+    //     var chart = chartElement.chart;
+    //     chart.data.labels = arr; //['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+    //     chart.data.datasets[0].data = arrd; //[10, 20, 30, 40, 45, 60, 70, 80, 90, 90]; // температура в нутри
+    //     chart.data.datasets[1].data = [10, 45, 200, 40, 45, 60, 70, 80, 90, 90]; // температура почвы 
+    //     chart.data.datasets[2].data = [10, 87, 30, 87, 45, 60, 70, 80, 90, 90]; // влажность 
+    //     chart.update();
+    // }
 
 
 
@@ -45,11 +51,13 @@ function update_temp(data) //обновляем значения темпера�
     t_pohvu.textContent = data.t2poh + "°C";
     h_pohva.textContent = data.vlag + "%";
 
-    const date = new Date(data.time_vnutr * 1000);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    let remainingSeconds = data.time_vnutr % 3600; // как получить оставшиеся секунды
+
+    const hours = Math.trunc(data.time_vnutr / 3600);
+    const minutes = Math.trunc(remainingSeconds / 60);
+    const seconds = data.time_vnutr % 60;
     time_vnutr.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
 }
 
 function perevod_hasov(timeosv) { // для конвертации времени что бы отобразить 
@@ -58,7 +66,6 @@ function perevod_hasov(timeosv) { // для конвертации времен�
     const minutes = date_on.getUTCMinutes().toString().padStart(2, '0');;
     //console.log(`${hours}:${minutes}`);
     return hours + ":" + minutes;
-
 }
 
 function update_set(data) { //отображаем настройки какие были при загрузке 
