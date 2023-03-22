@@ -173,6 +173,7 @@ var saveButton = document.getElementById('poliv_botton'); // ищем на ст�
 saveButton.addEventListener('click', poliv_bottonCallback); // запускаем вункцию калбек 
 function poliv_bottonCallback() {
     console.log("полить");
+    wrait_firebase("/set/poliv/botton_prin", true);
 }
 
 //document.getElementById('set_osveh_on').onchange = function() {
