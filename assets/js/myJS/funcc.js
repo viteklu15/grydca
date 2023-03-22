@@ -33,6 +33,7 @@ let h_pohva = document.getElementById("h_pohva");
 let time_vnutr = document.getElementById("time_vnutr");
 let set_t_on = document.getElementById("set_t_on");
 let set_t_prit_fan = document.getElementById("set_t_prit_fan");
+let set_cercul_fan = document.getElementById("set_cercul_fan");
 let set_vlaj_pritoh_fan = document.getElementById("set_vlaj_pritoh_fan");
 //освещение
 let set_osveh_on = document.getElementById("set_osveh_on");
@@ -71,6 +72,7 @@ function perevod_hasov(timeosv) { // для конвертации времен�
 function update_set(data) { //отображаем настройки какие были при загрузке 
     set_t_on.value = data.set_t_on;
     set_t_prit_fan.value = data.set_t_prit_fan;
+    set_cercul_fan.value = data.set_cercul_fan;
     set_vlaj_pritoh_fan.value = data.set_vlaj_pritoh_fan;
     set_osveh_on.value = perevod_hasov(data.osv.set_osveh_on);
     set_osveh_off.value = perevod_hasov(data.osv.set_osveh_off);
@@ -160,6 +162,7 @@ function saveButtonCallback() {
     console.log("Сохранить");
     wrait_firebase("/set/set_t_on", set_t_on.value);
     wrait_firebase("/set/set_t_prit_fan", set_t_prit_fan.value);
+    wrait_firebase("/set/set_cercul_fan", set_cercul_fan.value);
     wrait_firebase("/set/set_vlaj_pritoh_fan", set_vlaj_pritoh_fan.value);
     wrait_firebase("/set/set_vlaj_pritoh_fan", set_vlaj_pritoh_fan.value);
     wrait_firebase("/set/osv/set_osveh_on", unixTrans(set_osveh_on.value));
@@ -173,7 +176,9 @@ var saveButton = document.getElementById('poliv_botton'); // ищем на ст�
 saveButton.addEventListener('click', poliv_bottonCallback); // запускаем вункцию калбек 
 function poliv_bottonCallback() {
     console.log("полить");
-    wrait_firebase("/set/poliv/botton_prin", true);
+    if (confirm("Вы уверены, что хотите полить?")) {
+        wrait_firebase("/set/poliv/botton_prin", true);
+    }
 }
 
 //document.getElementById('set_osveh_on').onchange = function() {

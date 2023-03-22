@@ -1,11 +1,11 @@
 @media (min-width: 300px) {
-  #voda_icon {
+  .icon_m {
     display: none;
   }
 }
 
 @media (min-width: 576px) {
-  #voda_icon {
+  .icon_m {
     display: flex;
   }
 }
@@ -40,7 +40,7 @@
 }
 
 #setup_menu {
-  display: none;
+  /*display: none;*/
 }
 
 @media (min-width: 300px) {
