@@ -7,7 +7,7 @@ setInterval(function() {
     // fill datagraf array with dates from March 1, 2023 to March 10, 2023
     let arr = [];
     let arrd = [];
-
+    wrait_firebase("/write", true); // записываем что бы контроллер отправлял данные температуры и времени
 
     //console.log(arr);
 
@@ -24,7 +24,7 @@ setInterval(function() {
 
 
 
-}, 5000);
+}, 1000);
 
 //поиск элементов на странице 
 let tem_vhutri = document.getElementById("t_vhutri");
@@ -112,7 +112,7 @@ function modifyPolivClous(val) { // для деоктивации кнопок �
     } else {
         polivClous.style.pointerEvents = 'all';
         polivClous.style.opacity = 1;
-        console.log("Ручной"); // код функции
+        //console.log("Ручной"); // код функции
     }
 
 }

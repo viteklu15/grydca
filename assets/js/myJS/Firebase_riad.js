@@ -2,10 +2,6 @@ const username = localStorage.getItem("user_name");
 const password = localStorage.getItem("user_password");
 var log_ok = false;
 
-
-//console.log(username);
-//console.log(password);
-
 var login = "";
 var URL_BAZA = "https://testesp-918b4-default-rtdb.europe-west1.firebasedatabase.app"
 var jsoncon = ".json";
@@ -13,10 +9,10 @@ var jsoncon = ".json";
 function logokfuncc(pas) // проверка пароля 
 {
     if (pas == password) {
-        console.log("логин ок ");
+        //console.log("логин ок ");
         log_ok = true;
     } else {
-        console.log("неверный пароль");
+        //console.log("неверный пароль");
         alert('Неверный пароль или Email');
         window.location.href = 'login.html'; //перебросить на другую страницу 
     }
@@ -74,8 +70,7 @@ function riad_firebase_graf(key) // функция для чтения с баз
 
 if ((username != null && password != null) && (username != "" && password != "")) // проверяем есть ли в браузере логин и пароль 
 {
-    console.log("login и пароль есть в браузере проверяем с базой");
-    //login = username.replace(/\.[^.]+$/, ""); // убираем все что после точки 
+
     login = username;
     login = "/" + login;
     riad_firebasePas("/pas"); // запрос пароля в базе 

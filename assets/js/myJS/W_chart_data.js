@@ -17,6 +17,7 @@ function data_chart(data) {
             const t_pohvu = parsedData[date][time].t_pohvu;
             const h_pohva = parsedData[date][time].h_pohva;
             dataArray.push({ date, time, t_vhutri, t_pohvu, h_pohva });
+
         }
     }
 
@@ -38,8 +39,13 @@ function data_chart(data) {
     }
 
 
-    for (let index = skolkodey; index < dataArray.length; index++) {
-        dta_array.push(dataArray[index].date + " " + dataArray[index].time);
+    for (let index = skolkodey; index < dataArray.length; index++) { //формируем масивы для графика 
+        let dateString = dataArray[index].date;
+        let dateParts = dateString.split('-');
+        let day = dateParts[0];
+        let month = dateParts[1];
+        let date_1 = day + "-" + month;
+        dta_array.push(date_1 + " / " + dataArray[index].time);
         t_vhutri_array.push(dataArray[index].t_vhutri);
         t_pohvu_array.push(dataArray[index].t_pohvu);
         h_pohva_array.push(dataArray[index].h_pohva);
