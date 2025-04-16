@@ -1,227 +1,40 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Умная грядка</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/ddd.css">
-    <link rel="stylesheet" href="assets/css/mycss_test.css">
-    <link rel="stylesheet" href="assets/css/Toggle-Switch-toggle-switch.css">
-    <link rel="stylesheet" href="assets/css/Toggle-Switch.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 BLE Connector</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
-<body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-light text-truncate align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" id="navbarM">
-            <div class="container d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fab fa-pagelines"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>Меню</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link text-break active" id="glavn" href="#"><i class="fas fa-tachometer-alt"></i><span>Главная</span></a><a class="nav-link active" id="setup" href="#"><i class="fas fa-cog"></i><span>Насторйки</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="far fa-user-circle"></i><span>Логин</span></a></li>
-                    <li class="nav-item"></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+<body>
+    <div class="container">
+        <h1>ESP32 BLE Connector</h1>
+        
+        <button id="scanBtn" class="btn">Сканировать устройства</button>
+        <div id="devicesList" class="devices-list"></div>
+        
+        <div id="connectedDevice" class="connected-device" style="display: none;">
+            <h2>Подключенное устройство</h2>
+            <p id="deviceName"></p>
+            <button id="disconnectBtn" class="btn btn-danger">Отключиться</button>
+            
+            <div class="services-section">
+                <h3>Сервисы и характеристики</h3>
+                <div id="servicesList"></div>
             </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <h3 class="text-dark mb-0">Умная грядка</h3>
-                        <div class="row align-items-center no-gutters">
-                            <div class="col me-2" id="vklvkl" style="padding-right: 5px;">
-                                <h4 class="text-dark mb-0">Вкл/Выкл</h4>
-                            </div>
-                            <div class="col-auto"><label class="switch">
-  <input id="powerON" type="checkbox">
-  <span class="slider round"></span>
-</label></div>
-                        </div>
-                    </div>
-                </nav>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2" style="padding-right: 5px;">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1" style="padding-right: 0px;"><span>Температура внутри</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_vhutri">00,00°C<br></span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Температура почвы</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="t_pohvu">00,12°C<br></span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Влажность воздуха<br></span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="h_pohva">00,00%<br></span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-percent fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-primary py-2" id="TIME_m">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>внутренние часы<br></span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span id="time_vnutr"><span style="color: rgb(32, 33, 36);">10:12:34</span><br></span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="icon ion-android-stopwatch fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="char_index">
-                        <div class="col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
-                            <div class="card shadow mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">График показаний&nbsp;</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
-                                            <p class="text-center dropdown-header">управление графиком</p>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" id="chart_segodhy" href="#">Сегодня</a><a class="dropdown-item" id="chart_3dey" href="#">За 3 дня</a><a class="dropdown-item" id="chart_10dey" href="#">За 10 дней</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Темп. в нутри&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(228,21,58,0.05)&quot;,&quot;borderColor&quot;:&quot;rgb(187,16,26)&quot;},{&quot;label&quot;:&quot;Темп. почвы&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(28,200,138,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1cc88a&quot;},{&quot;label&quot;:&quot;Влажность&quot;,&quot;fill&quot;:true,&quot;data&quot;:[],&quot;backgroundColor&quot;:&quot;rgba(31,28,200,0.31)&quot;,&quot;borderWidth&quot;:&quot;3&quot;,&quot;borderColor&quot;:&quot;#1a21d9&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;position&quot;:&quot;bottom&quot;,&quot;reverse&quot;:false},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;,&quot;display&quot;:false},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;1&quot;],&quot;zeroLineBorderDash&quot;:[&quot;1&quot;],&quot;drawOnChartArea&quot;:true},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;1&quot;],&quot;zeroLineBorderDash&quot;:[&quot;1&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;beginAtZero&quot;:false,&quot;padding&quot;:30}}]}}}"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="setup_menu">
-                        <div class="col-md-6 col-xl-6 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2" style="padding-right: 5px;">
-                                            <div class="text-uppercase text-start text-primary d-xl-flex d-xxl-flex fw-bold text-xs mb-1" style="padding-right: 0px;"><span class="text-danger d-xl-flex d-xxl-flex align-items-xl-start align-items-xxl-start"><br><strong><span style="color: rgb(28, 200, 138);">ТЕМПЕРАТУРА ВКЛЮЧЕНИЯ ОБОГРЕВА</span></strong><br></span></div>
-                                            <div class="text-dark d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center fw-bold h5 mb-0"><input type="number" id="set_t_on" style="width: 60px;" value="0">
-                                                <h3 class="text-dark mb-0" style="width: 50px;"><strong>°C</strong><br></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-6 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2" style="padding-right: 5px;">
-                                            <div class="text-uppercase text-start text-primary fw-bold text-xs mb-1" style="padding-right: 0px;"><span class="text-danger"><strong><span style="color: rgb(246, 194, 62);">ВКЛЮЧЕНИЯ ПРИТОЧНОГО ВЕНТИЛЯТОРА</span></strong><br></span></div>
-                                            <div class="text-dark d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center fw-bold h5 mb-0"><input type="number" id="set_t_prit_fan" style="width: 60px;" value="3">
-                                                <h3 class="text-dark mb-0" style="width: 50px;"><strong>°C</strong><br></h3><input type="number" id="set_vlaj_pritoh_fan" style="width: 60px;" value="3">
-                                                <h3 class="text-dark mb-0" style="width: 50px;"><strong>%</strong></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto icon_m"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-6 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2" style="padding-right: 5px;">
-                                            <div class="text-uppercase text-start text-primary fw-bold text-xs mb-1" style="padding-right: 0px;"><span class="text-danger">Температура включения&nbsp;циркуляционного вентилятора&nbsp;</span></div>
-                                            <div class="text-dark d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center fw-bold h5 mb-0"><input type="number" id="set_cercul_fan" style="width: 60px;" value="2">
-                                                <h3 class="text-dark mb-0" style="width: 50px;"><strong>°C</strong><br></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto icon_m"><i class="fas fa-temperature-high fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-6 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col d-flex d-xl-flex d-xxl-flex align-items-xl-center align-items-xxl-end me-2" id="stil_time" style="padding-right: 5px;"><span class="text-info d-xxl-flex align-items-xxl-end" style="margin-right: 10px;"><strong>Настройка освещения</strong>&nbsp;</span>
-                                            <div style="margin-right: 0;"><span class="text-success d-xxl-flex justify-content-xxl-center"><strong>Вкл&nbsp;&nbsp;</strong></span><input id="set_osveh_on" type="time"></div>
-                                            <div><span class="text-warning d-xxl-flex justify-content-xxl-center"><strong>Откл</strong></span><input id="set_osveh_off" type="time"></div>
-                                        </div>
-                                        <div class="col-auto"><i class="far fa-lightbulb fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-4">
-                            <div class="card shadow border-start-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col-12 col-sm-9 col-md-10 col-lg-10 col-xl-10 col-xxl-11 offset-0 offset-lg-0 offset-xl-0 d-xl-flex align-items-xl-center">
-                                            <div><span class="text-success"><strong>Режим полива&nbsp;</strong></span>
-                                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" name="poliv" value="0" checked=""><label class="form-check-label" for="formCheck-2"><strong>Ручной</strong></label></div>
-                                                <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1" name="poliv" value="1"><label class="form-check-label" for="formCheck-1"><strong>Авто</strong></label></div>
-                                            </div>
-                                            <div class="d-xl-flex align-items-xl-center poliv_clous">
-                                                <hr>
-                                                <div class="d-flex d-xl-flex justify-content-sm-end align-items-xl-center" id="interval_poliv"><span class="text-primary" style="margin-left: 10px;">Интервал полива часы&nbsp;</span><input type="number" id="set_poliv_interval_has" style="width: 60px;" value="0"></div>
-                                                <hr>
-                                                <div class="d-flex d-xl-flex justify-content-sm-end align-items-xl-center"><span class="text-primary" style="margin-left: 10px;">Время полива мин.&nbsp;</span><input type="number" id="set_time_poliv_min" style="width: 60px;" value="1" max="60" min="1">
-                                                    <hr>
-                                                </div>
-                                                <div id="div_poliv"><button class="btn btn-success text-bg-success" id="poliv_botton" type="submit" style="width: 100%;margin-top: 0px;">Пренудительно полить</button></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2 col-md-2 col-lg-1 col-xl-1 col-xxl-1 offset-sm-1 offset-md-0 offset-lg-1 offset-xl-1 offset-xxl-0 d-sm-flex d-md-flex d-xl-flex d-xxl-flex justify-content-sm-end justify-content-md-end justify-content-xl-end justify-content-xxl-end icon_m" id="voda_icon"><i class="fas fa-water d-xl-flex d-xxl-flex justify-content-xl-end justify-content-xxl-end fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12"><button class="btn btn-primary" id="save_button" type="button" style="width: 100%;margin-bottom: 2%;">Сохранить</button></div>
-                    </div>
-                </div>
+            
+            <div class="data-section">
+                <h3>Отправка данных</h3>
+                <input type="text" id="dataInput" placeholder="Введите данные">
+                <button id="sendDataBtn" class="btn">Отправить</button>
+                <div id="receivedData" class="received-data"></div>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span><br><strong><span style="color: rgb(32, 32, 32);">ООО "СОВРЕМЕННЫЕ ТЕХНОЛОГИИ"&nbsp;</span></strong></span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top" style="background: rgba(90,92,105,0.12);"><i class="fas fa-angle-up"></i></a>
+        </div>
+        
+        <div id="status" class="status"></div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/chart.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/myJS/Firebase_riad.js"></script>
-    <script src="assets/js/myJS/funcc.js"></script>
-    <script src="assets/js/myJS/W_chart_data.js"></script>
-    <script src="assets/js/theme.js"></script>
+    
+    <script src="app.js"></script>
 </body>
-
 </html>
