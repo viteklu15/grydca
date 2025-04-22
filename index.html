@@ -9,7 +9,7 @@
 	<style>
 		body {
 			font-family: Arial, sans-serif;
-			max-width: 500px;
+			max-width: 700px;
 			margin: 0 auto;
 			padding: 20px;
 		}
@@ -29,7 +29,7 @@
 			font-weight: bold;
 			margin-bottom: 5px;
 			display: inline-block;
-			width: 150px;
+			width: 160px;
 		}
 
 		input[type="text"],
@@ -70,11 +70,32 @@
 			font-size: 14px;
 		}
 
-		.inline-group {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
+		.fan-type-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fan-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Каждый radio + label в одной строке */
+.fan-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* На мобильных — столбик */
+@media (max-width: 600px) {
+  .fan-options {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 	</style>
 	<script>
 		function validateForm() {
@@ -587,15 +608,23 @@
 			<option value="1201">3 Вентел</option>
 		</select><br><br>
 
-		<div class="inline-group">
-			<label>Тип вентиляторов:</label>
-			<input type="radio" id="old_fans" name="fan_type" value="star" checked>
-			<label for="old_fans">Старые</label>
-			<input type="radio" id="new_fans" name="fan_type" value="new">
-			<label for="new_fans">Новые</label>
-			<input type="radio" id="fan_ten" name="fan_type" value="ten">
-			<label for="new_fans">Тэн</label>
-		</div>
+		<div class="fan-type-group">
+			<label class="fan-type-label">Тип вентиляторов:</label>
+			<div class="fan-options">
+			  <div class="fan-option">
+				<input type="radio" id="old_fans" name="fan_type" value="star" checked>
+				<label for="old_fans">Старые</label>
+			  </div>
+			  <div class="fan-option">
+				<input type="radio" id="new_fans" name="fan_type" value="new">
+				<label for="new_fans">Новые</label>
+			  </div>
+			  <div class="fan-option">
+				<input type="radio" id="fan_ten" name="fan_type" value="ten">
+				<label for="fan_ten">ТЭН</label>
+			  </div>
+			</div>
+		  </div>
 		<br><br>
 
 		<label for="dopColor">Комплектация:</label>
