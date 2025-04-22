@@ -59,6 +59,15 @@
 		input[type="submit"]:hover {
 			background-color: #45a049;
 		}
+		.number-input {
+    width: 60px;
+    padding: 8px;
+    margin: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
 
 		.inline-group {
 			display: flex;
@@ -487,16 +496,16 @@
 		</select><br><br>
 
 		<label for="maxValues">MAX значение:</label><br>
-		<input type="text" name="max1" size="2" value="5000">
-		<input type="text" name="max2" size="2" value="2500">
-		<input type="text" name="max3" size="2" value="1200">
-		<input type="text" name="max4" size="2" value="1200"><br><br>
+<input type="text" name="max1" class="number-input" value="5000">
+<input type="text" name="max2" class="number-input" value="2500">
+<input type="text" name="max3" class="number-input" value="1200">
+<input type="text" name="max4" class="number-input" value="1200"><br><br>
 
-		<label for="minValues">MIN значение:</label><br>
-		<input type="text" name="min1" size="2" value="900">
-		<input type="text" name="min2" size="2" value="550">
-		<input type="text" name="min3" size="2" value="650">
-		<input type="text" name="min4" size="2" value="650"><br><br>
+<label for="minValues">MIN значение:</label><br>
+<input type="text" name="min1" class="number-input" value="900">
+<input type="text" name="min2" class="number-input" value="550">
+<input type="text" name="min3" class="number-input" value="650">
+<input type="text" name="min4" class="number-input" value="650"><br><br>
 
 		<label for="taim">Время работы помпы в секундах:</label>
 		<input type="text" name="taim" size="3" value="45"><br><br>
