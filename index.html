@@ -59,15 +59,16 @@
 		input[type="submit"]:hover {
 			background-color: #45a049;
 		}
+
 		.number-input {
-    width: 60px;
-    padding: 8px;
-    margin: 5px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
+			width: 60px;
+			padding: 8px;
+			margin: 5px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			font-size: 14px;
+		}
 
 		.inline-group {
 			display: flex;
@@ -139,7 +140,7 @@
 			var min3 = document.querySelector('input[name="min3"]');
 			var min4 = document.querySelector('input[name="min4"]');
 
-			function fan_nev_select(nomer) {
+			function fan_nev_select(nomer) { // для новых вентеляторов 
 				if (nomer == 600) {
 					max1.value = "3000";
 					max2.value = "3000";
@@ -198,6 +199,65 @@
 
 			}
 
+			function fan_ten_select(nomer) { //для тена 
+				if (nomer == 600) {
+					max1.value = "7000";
+					max2.value = "7000";
+					max3.value = "7000";
+					max4.value = "7000";
+
+					min1.value = "1100";
+					min2.value = "1100";
+					min3.value = "1100";
+					min4.value = "1100";
+				}
+				if (nomer == 800) {
+					max1.value = "3000";
+					max2.value = "2400";
+					max3.value = "6000";
+					max4.value = "100";
+
+					min1.value = "1400";
+					min2.value = "800";
+					min3.value = "100";
+					min4.value = "0";
+				}
+				if (nomer == 1000) {
+					max1.value = "7000";
+					max2.value = "7000";
+					max3.value = "7000";
+					max4.value = "7000";
+
+					min1.value = "1200";
+					min2.value = "1200";
+					min3.value = "1200";
+					min4.value = "1200";
+				}
+				if (nomer == 1200) {
+					max1.value = "7000";
+					max2.value = "7000";
+					max3.value = "7000";
+					max4.value = "7000";
+
+					min1.value = "1200";
+					min2.value = "1200";
+					min3.value = "1200";
+					min4.value = "1200";
+				}
+				if (nomer == 1500) {
+					max1.value = "7000";
+					max2.value = "7000";
+					max3.value = "7000";
+					max4.value = "7000";
+
+					min1.value = "1200";
+					min2.value = "1200";
+					min3.value = "1200";
+					min4.value = "1200";
+				}
+
+			}
+
 
 
 			var selectedModel = modelSelect.value;
@@ -229,8 +289,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(600)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(600)
 					}
 
 					break;
@@ -248,8 +312,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(800)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(800)
 					}
 					break;
 				case "1000":
@@ -266,8 +334,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1000)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "130";
+						fan_ten_select(1000)
 					}
 					break;
 				case "1200":
@@ -284,8 +356,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1200)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1200)
 					}
 					break;
 				case "1500":
@@ -302,8 +378,12 @@
 						min3.value = "700";
 						min4.value = "700";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1500)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1500)
 					}
 					break;
 				case "2000":
@@ -320,8 +400,12 @@
 						min3.value = "700";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1000)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1000)
 					}
 					break;
 				case "2400":
@@ -338,8 +422,12 @@
 						min3.value = "700";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1200)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1200)
 					}
 					break;
 				case "3000":
@@ -356,8 +444,12 @@
 						min3.value = "900";
 						min4.value = "600";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1500)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1500)
 					}
 					break;
 				case "H26":
@@ -374,8 +466,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(600)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(600)
 					}
 					break;
 				case "H800":
@@ -392,8 +488,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(800)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(800)
 					}
 					break;
 				case "H1000":
@@ -410,8 +510,12 @@
 						min3.value = "650";
 						min4.value = "650";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1000)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1000)
 					}
 					break;
 				case "H1500":
@@ -428,8 +532,12 @@
 						min3.value = "700";
 						min4.value = "700";
 					}
-					else {
+					else if (radioButtons.value === "new") {
 						fan_nev_select(1500)
+					}
+					else if (radioButtons.value === "ten") {
+						taimInput.value = "100";
+						fan_ten_select(1500)
 					}
 					break;
 				default:
@@ -485,6 +593,8 @@
 			<label for="old_fans">Старые</label>
 			<input type="radio" id="new_fans" name="fan_type" value="new">
 			<label for="new_fans">Новые</label>
+			<input type="radio" id="fan_ten" name="fan_type" value="ten">
+			<label for="new_fans">Тэн</label>
 		</div>
 		<br><br>
 
@@ -496,16 +606,16 @@
 		</select><br><br>
 
 		<label for="maxValues">MAX значение:</label><br>
-<input type="text" name="max1" class="number-input" value="5000">
-<input type="text" name="max2" class="number-input" value="2500">
-<input type="text" name="max3" class="number-input" value="1200">
-<input type="text" name="max4" class="number-input" value="1200"><br><br>
+		<input type="text" name="max1" class="number-input" value="5000">
+		<input type="text" name="max2" class="number-input" value="2500">
+		<input type="text" name="max3" class="number-input" value="1200">
+		<input type="text" name="max4" class="number-input" value="1200"><br><br>
 
-<label for="minValues">MIN значение:</label><br>
-<input type="text" name="min1" class="number-input" value="900">
-<input type="text" name="min2" class="number-input" value="550">
-<input type="text" name="min3" class="number-input" value="650">
-<input type="text" name="min4" class="number-input" value="650"><br><br>
+		<label for="minValues">MIN значение:</label><br>
+		<input type="text" name="min1" class="number-input" value="900">
+		<input type="text" name="min2" class="number-input" value="550">
+		<input type="text" name="min3" class="number-input" value="650">
+		<input type="text" name="min4" class="number-input" value="650"><br><br>
 
 		<label for="taim">Время работы помпы в секундах:</label>
 		<input type="text" name="taim" size="3" value="45"><br><br>
