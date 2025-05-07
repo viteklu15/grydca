@@ -71,31 +71,31 @@
 		}
 
 		.fan-type-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
 
-.fan-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
+		.fan-options {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 15px;
+		}
 
-/* Каждый radio + label в одной строке */
-.fan-option {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+		/* Каждый radio + label в одной строке */
+		.fan-option {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
 
-/* На мобильных — столбик */
-@media (max-width: 600px) {
-  .fan-options {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
+		/* На мобильных — столбик */
+		@media (max-width: 600px) {
+			.fan-options {
+				flex-direction: column;
+				gap: 8px;
+			}
+		}
 	</style>
 	<script>
 		function validateForm() {
@@ -137,14 +137,19 @@
 
 		document.addEventListener("DOMContentLoaded", function () {
 			const radioButtons = document.querySelectorAll('input[name="fan_type"]');
+			const radioButtons_mod = document.querySelectorAll('input[name="mod"]');
 			radioButtons.forEach(radio => {
+				radio.addEventListener("change", wrait_perem);
+			});
+			radioButtons_mod.forEach(radio => {
 				radio.addEventListener("change", wrait_perem);
 			});
 		});
 
 		function wrait_perem() {
 			const radioButtons = document.querySelector('input[name="fan_type"]:checked');
-			// console.log("Selected fan type:", radioButtons.value);
+			const radioButtons_mod = document.querySelector('input[name="mod"]:checked');
+			console.log("Selected_mod type:", radioButtons_mod.value);
 			var tip_fan = document.getElementById("model_id");
 
 			var modelSelect = document.getElementById("model_id");
@@ -183,6 +188,12 @@
 					min2.value = "800";
 					min3.value = "100";
 					min4.value = "0";
+					if (radioButtons_mod.value === "uvlajnitel") {
+						max1.value = "3000";
+						max2.value = "1500";
+						min1.value = "1400";
+						min2.value = "300";
+					}
 				}
 				if (nomer == 1000) {
 					max1.value = "4000";
@@ -194,6 +205,12 @@
 					min2.value = "1300";
 					min3.value = "100";
 					min4.value = "0";
+					if (radioButtons_mod.value === "uvlajnitel") {
+						max1.value = "4000";
+						max2.value = "2000";
+						min1.value = "1300";
+						min2.value = "400";
+					}
 				}
 				if (nomer == 1200) {
 					max1.value = "4500";
@@ -227,10 +244,10 @@
 					max3.value = "7000";
 					max4.value = "7000";
 
-					min1.value = "1100";
-					min2.value = "1100";
-					min3.value = "1100";
-					min4.value = "1100";
+					min1.value = "500";
+					min2.value = "500";
+					min3.value = "500";
+					min4.value = "500";
 				}
 				if (nomer == 800) {
 					max1.value = "3000";
@@ -283,18 +300,6 @@
 
 			var selectedModel = modelSelect.value;
 
-			// if (selectedModel === "H26" || selectedModel === "600") {
-			// 	minTokInput.value = "50";
-			// } else {
-			// 	minTokInput.value = "800";
-			// }
-			// if (selectedModel === "600") {
-			// 	taimInput.value = "40";
-			// } else if (selectedModel === "800") {
-			// 	taimInput.value = "75";
-			// }
-
-
 			switch (selectedModel) {
 				case "600":
 					taimInput.value = "55";
@@ -315,6 +320,7 @@
 					}
 					else if (radioButtons.value === "ten") {
 						taimInput.value = "100";
+						minTokInput.value = "800";
 						fan_ten_select(600)
 					}
 
@@ -609,22 +615,37 @@
 		</select><br><br>
 
 		<div class="fan-type-group">
+			<label class="fan-type-label">Модификация:</label>
+			<div class="fan-options">
+				<div class="fan-option">
+					<input type="radio" id="mod_standart" name="mod" value="standart" checked>
+					<label for="mod_standart">Обычный</label>
+				</div>
+				<div class="fan-option">
+					<input type="radio" id="mod_uvlajnitel" name="mod" value="uvlajnitel">
+					<label for="mod_uvlajnitel">Увлажнитель</label>
+				</div>
+			</div>
+		</div>
+		<br><br>
+
+		<div class="fan-type-group">
 			<label class="fan-type-label">Тип вентиляторов:</label>
 			<div class="fan-options">
-			  <div class="fan-option">
-				<input type="radio" id="old_fans" name="fan_type" value="star" checked>
-				<label for="old_fans">Старые</label>
-			  </div>
-			  <div class="fan-option">
-				<input type="radio" id="new_fans" name="fan_type" value="new">
-				<label for="new_fans">Новые</label>
-			  </div>
-			  <div class="fan-option">
-				<input type="radio" id="fan_ten" name="fan_type" value="ten">
-				<label for="fan_ten">ТЭН</label>
-			  </div>
+				<div class="fan-option">
+					<input type="radio" id="old_fans" name="fan_type" value="star" checked>
+					<label for="old_fans">Старые</label>
+				</div>
+				<div class="fan-option">
+					<input type="radio" id="new_fans" name="fan_type" value="new">
+					<label for="new_fans">Новые</label>
+				</div>
+				<div class="fan-option">
+					<input type="radio" id="fan_ten" name="fan_type" value="ten">
+					<label for="fan_ten">ТЭН</label>
+				</div>
 			</div>
-		  </div>
+		</div>
 		<br><br>
 
 		<label for="dopColor">Комплектация:</label>
