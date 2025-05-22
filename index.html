@@ -244,11 +244,11 @@
 			}
 
 			function fan_ten_select(nomer) { //для тена 
-				if (nomer == 600) {
-					max1.value = "7000";
-					max2.value = "7000";
-					max3.value = "7000";
-					max4.value = "7000";
+					if (nomer == 600) {
+					max1.value = "3500";
+					max2.value = "3500";
+					max3.value = "3500";
+					max4.value = "3500";
 
 					min1.value = "500";
 					min2.value = "500";
@@ -256,48 +256,48 @@
 					min4.value = "500";
 				}
 				if (nomer == 800) {
-					max1.value = "2500";
-					max2.value = "2500";
-					max3.value = "7000";
-					max4.value = "7000";
+					max1.value = "3800";
+					max2.value = "3800";
+					max3.value = "3800";
+					max4.value = "3800";
 
-					min1.value = "500";
-					min2.value = "500";
-					min3.value = "1200";
-					min4.value = "1200";
+					min1.value = "800";
+					min2.value = "800";
+					min3.value = "800";
+					min4.value = "800";
 				}
 				if (nomer == 1000) {
-					max1.value = "4700";
-					max2.value = "4700";
-					max3.value = "7000";
-					max4.value = "7000";
+					max1.value = "5000";
+					max2.value = "5000";
+					max3.value = "5000";
+					max4.value = "5000";
 
-					min1.value = "700";
-					min2.value = "700";
-					min3.value = "1200";
-					min4.value = "1200";
+					min1.value = "1000";
+					min2.value = "1000";
+					min3.value = "1000";
+					min4.value = "1000";
 				}
 				if (nomer == 1200) {
-					max1.value = "7000";
-					max2.value = "7000";
-					max3.value = "7000";
-					max4.value = "7000";
+					max1.value = "5000";
+					max2.value = "5000";
+					max3.value = "5000";
+					max4.value = "5000";
 
-					min1.value = "1200";
-					min2.value = "1200";
-					min3.value = "1200";
-					min4.value = "1200";
+					min1.value = "1000";
+					min2.value = "1000";
+					min3.value = "1000";
+					min4.value = "1000";
 				}
 				if (nomer == 1500) {
-					max1.value = "7000";
-					max2.value = "7000";
-					max3.value = "7000";
-					max4.value = "7000";
+					max1.value = "5300";
+					max2.value = "5300";
+					max3.value = "5300";
+					max4.value = "5300";
 
-					min1.value = "1200";
-					min2.value = "1200";
-					min3.value = "1200";
-					min4.value = "1200";
+					min1.value = "1300";
+					min2.value = "1300";
+					min3.value = "1300";
+					min4.value = "1300";
 				}
 
 			}
@@ -325,7 +325,7 @@
 						fan_nev_select(600)
 					}
 					else if (radioButtons.value === "ten") {
-						taimInput.value = "100";
+						taimInput.value = "120";
 						minTokInput.value = "800";
 						fan_ten_select(600)
 					}
@@ -350,6 +350,7 @@
 					}
 					else if (radioButtons.value === "ten") {
 						taimInput.value = "150";
+						minTokInput.value = "1400"
 						fan_ten_select(800)
 					}
 					break;
@@ -372,6 +373,7 @@
 					}
 					else if (radioButtons.value === "ten") {
 						taimInput.value = "200";
+						minTokInput.value = "1400"
 						fan_ten_select(1000)
 					}
 					break;
@@ -393,7 +395,8 @@
 						fan_nev_select(1200)
 					}
 					else if (radioButtons.value === "ten") {
-						taimInput.value = "100";
+						taimInput.value = "200";
+						minTokInput.value = "1400"
 						fan_ten_select(1200)
 					}
 					break;
@@ -415,7 +418,8 @@
 						fan_nev_select(1500)
 					}
 					else if (radioButtons.value === "ten") {
-						taimInput.value = "100";
+						taimInput.value = "200";
+						minTokInput.value = "1400";
 						fan_ten_select(1500)
 					}
 					break;
