@@ -224,7 +224,7 @@
 					min4.value = "0";
 					if (radioButtons_mod.value === "uvlajnitel") {
 						max1.value = "4500";
-						max2.value = "2500";
+						max2.value = "2450";
 						min1.value = "1800";
 						min2.value = "450";
 					}
@@ -239,12 +239,18 @@
 					min2.value = "1600";
 					min3.value = "100";
 					min4.value = "0";
+					if (radioButtons_mod.value === "uvlajnitel") {
+						max1.value = "5000";
+						max2.value = "2450";
+						min1.value = "2200";
+						min2.value = "450";
+					}
 				}
 
 			}
 
 			function fan_ten_select(nomer) { //для тена 
-					if (nomer == 600) {
+				if (nomer == 600) {
 					max1.value = "3500";
 					max2.value = "3500";
 					max3.value = "3500";
