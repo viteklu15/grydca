@@ -169,12 +169,12 @@
 			function fan_nev_select(nomer) { // для новых вентеляторов 
 				if (nomer == 600) {
 					max1.value = "3000";
-					max2.value = "3000";
+					max2.value = "1500";
 					max3.value = "6000";
 					max4.value = "100";
 
 					min1.value = "1100";
-					min2.value = "900";
+					min2.value = "500";
 					min3.value = "100";
 					min4.value = "0";
 				}
@@ -246,7 +246,18 @@
 						min2.value = "450";
 					}
 				}
+				if (nomer == 2000) {
+					max1.value = "4000";
+					max2.value = "4000";
+					max3.value = "6000";
+					max4.value = "100";
 
+					min1.value = "1300";
+					min2.value = "1300";
+					min3.value = "100";
+					min4.value = "0";
+
+				}
 			}
 
 			function fan_ten_select(nomer) { //для тена 
@@ -444,7 +455,7 @@
 						min4.value = "650";
 					}
 					else if (radioButtons.value === "new") {
-						fan_nev_select(1000)
+						fan_nev_select(2000)
 					}
 					else if (radioButtons.value === "ten") {
 						taimInput.value = "100";
