@@ -1,28 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="manifest" href="manifest.json">
+	<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" defer></script>
 	<title>Настройки</title>
-	<style>
+		<style>
+		:root {
+			--bg-top: #cac7c7;
+			--bg-bottom: #f6fbff;
+			--card-bg: #ffffff;
+			--text-main: #1f2a44;
+			--border: #d7dfef;
+			--accent: #1f8f63;
+			--accent-hover: #17734f;
+			--focus: #2d8cff;
+		}
+
 		body {
-			font-family: Arial, sans-serif;
+			font-family: "Segoe UI", "Trebuchet MS", Arial, sans-serif;
 			max-width: 700px;
 			margin: 0 auto;
 			padding: 20px;
+			background: linear-gradient(165deg, var(--bg-top), var(--bg-bottom));
+			color: var(--text-main);
 		}
 
 		h2 {
-			color: #333;
+			color: var(--text-main);
+			margin: 8px 0 18px;
+			font-size: 30px;
 		}
 
 		form {
-			background-color: #f9f9f9;
+			background-color: var(--card-bg);
 			padding: 20px;
-			border-radius: 5px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 16px;
+			border: 1px solid var(--border);
+			box-shadow: 0 10px 24px rgba(20, 39, 75, 0.08);
 		}
 
 		label {
@@ -30,16 +47,27 @@
 			margin-bottom: 5px;
 			display: inline-block;
 			width: 160px;
+			color: var(--text-main);
 		}
 
 		input[type="text"],
 		select {
-			padding: 8px;
+			padding: 10px 12px;
 			margin-bottom: 15px;
 			box-sizing: border-box;
-			border: 1px solid #ccc;
-			border-radius: 4px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
 			font-size: 14px;
+			transition: border-color 0.2s, box-shadow 0.2s;
+			background: #fff;
+			color: var(--text-main);
+		}
+
+		input[type="text"]:focus,
+		select:focus {
+			border-color: var(--focus);
+			box-shadow: 0 0 0 3px rgba(45, 140, 255, 0.15);
+			outline: none;
 		}
 
 		input[type="radio"] {
@@ -47,27 +75,45 @@
 		}
 
 		input[type="submit"] {
-			background-color: #4CAF50;
+			background-color: var(--accent);
 			color: white;
-			padding: 10px 20px;
+			padding: 11px 22px;
 			border: none;
-			border-radius: 4px;
+			border-radius: 10px;
 			cursor: pointer;
 			font-size: 16px;
+			font-weight: 600;
+			transition: background-color 0.2s, transform 0.15s;
 		}
 
 		input[type="submit"]:hover {
-			background-color: #45a049;
+			background-color: var(--accent-hover);
+			transform: translateY(-1px);
 		}
 
 		.number-input {
 			width: 60px;
-			padding: 8px;
+			padding: 9px;
 			margin: 5px;
 			box-sizing: border-box;
-			border: 1px solid #ccc;
-			border-radius: 4px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
 			font-size: 14px;
+		}
+
+		.values-group {
+			margin-bottom: 14px;
+		}
+
+		.values-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 2px;
+		}
+
+		.values-row .number-input {
+			margin: 0;
 		}
 
 		.fan-type-group {
@@ -82,6 +128,126 @@
 			gap: 15px;
 		}
 
+		#error-msg {
+			min-height: 18px;
+			color: #d02443;
+			font-weight: 600;
+		}
+
+		.device-id-row {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-bottom: 15px;
+		}
+
+		.device-id-row label {
+			margin-bottom: 0;
+		}
+
+		.device-id-input-wrap {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		#id_product {
+			width: 100px;
+			margin-bottom: 0;
+		}
+
+		.qr-icon-badge {
+			width: 36px;
+			height: 36px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			background: #f2f7ff;
+			color: #36517f;
+			padding: 0;
+			cursor: pointer;
+		}
+
+		.qr-icon-badge svg {
+			width: 22px;
+			height: 22px;
+			display: block;
+		}
+
+		.qr-icon-badge:hover {
+			background: #e8f0ff;
+		}
+
+		.qr-icon-badge:focus-visible {
+			outline: 2px solid var(--focus);
+			outline-offset: 2px;
+		}
+
+		.modal {
+			position: fixed;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: rgba(0, 0, 0, 0.55);
+			padding: 20px;
+			z-index: 1000;
+		}
+
+		.modal.hidden {
+			display: none;
+		}
+
+		.modal-content {
+			width: 100%;
+			max-width: 540px;
+			background: #fff;
+			border-radius: 12px;
+			padding: 16px;
+			box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+		}
+
+		.scanner h3 {
+			margin: 0 0 12px;
+		}
+
+		.scanner video {
+			width: 100%;
+			border: 1px solid var(--border);
+			background: #000;
+			border-radius: 8px;
+		}
+
+		#canvas {
+			display: none;
+		}
+
+		#output {
+			padding: 8px 10px;
+			border: 1px solid var(--border);
+			border-radius: 8px;
+			min-height: 36px;
+			margin-top: 10px;
+			background: #f9fbff;
+		}
+
+		#stopBtn {
+			margin-top: 10px;
+			padding: 10px 12px;
+			border: none;
+			border-radius: 8px;
+			background: #6b7280;
+			color: #fff;
+			cursor: pointer;
+		}
+
+		#stopBtn:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+
 		/* Каждый radio + label в одной строке */
 		.fan-option {
 			display: flex;
@@ -89,11 +255,76 @@
 			gap: 5px;
 		}
 
-		/* На мобильных — столбик */
+		/* На мобильных - столбик */
 		@media (max-width: 600px) {
+			body {
+				padding: 12px;
+			}
+
+			h2 {
+				font-size: 26px;
+				margin-bottom: 12px;
+			}
+
+			form {
+				padding: 14px;
+				border-radius: 12px;
+			}
+
+			label {
+				display: block;
+				width: auto;
+				margin-bottom: 6px;
+			}
+
+			input[type="text"],
+			select {
+				width: 100%;
+				margin-bottom: 12px;
+			}
+
+			.number-input {
+				width: calc(50% - 10px);
+				margin: 4px;
+			}
+
+			.values-row {
+				flex-wrap: nowrap;
+				gap: 10px;
+			}
+
+			.values-row .number-input {
+				width: calc((100% - 30px) / 4);
+				min-width: 0;
+				margin: 0;
+				padding: 9px 8px;
+				text-align: center;
+			}
+
 			.fan-options {
 				flex-direction: column;
 				gap: 8px;
+			}
+
+			.device-id-row {
+				flex-direction: column;
+				align-items: stretch;
+				margin-bottom: 12px;
+			}
+
+			.device-id-input-wrap {
+				width: 100%;
+				gap: 10px;
+			}
+
+			#id_product {
+				flex: 1;
+				width: auto;
+				margin-bottom: 0;
+			}
+
+			.qr-icon-badge {
+				flex-shrink: 0;
 			}
 		}
 	</style>
@@ -102,7 +333,7 @@
 			validateForm_ip();
 			var id_product = document.getElementById("id_product").value;
 			if (id_product.length !== 6) {
-				alert("Поле 'Номер устройства' должно содержать  6 символов.");
+				alert("Поле 'Номер устройства' должно содержать 6 символов.");
 				return false;
 			}
 			// // Если model_id = "1500", то заменяем его на "1200"
@@ -166,7 +397,7 @@
 			var min3 = document.querySelector('input[name="min3"]');
 			var min4 = document.querySelector('input[name="min4"]');
 
-			function fan_nev_select(nomer) { // для новых вентеляторов 
+			function fan_nev_select(nomer) { // для новых вентиляторов 
 				if (nomer == 600) {
 					max1.value = "3000";
 					max2.value = "1500";
@@ -277,7 +508,7 @@
 				}
 			}
 
-			function fan_ten_select(nomer) { //для тена 
+			function fan_ten_select(nomer) { // для тэна 
 				if (nomer == 600) {
 					max1.value = "2000";
 					max2.value = "2000";
@@ -681,12 +912,33 @@
 	<h2>Настройки</h2>
 	<form onsubmit="return ">
 		<label for="IP">IP:</label>
-		<input type="text" id="ip" name="ip" size="10" value="192.168.0.1">
+		<input type="text" id="ip" name="ip" size="10" value="192.168.0.">
 	</form><br>
 	<div id="error-msg"></div><br>
 	<form id="myForm" action="http://192.168.4.1/setingdata" method="GET" onsubmit="return validateForm()">
-		<label for="id_product">Номер устройства:</label>
-		<input type="text" id="id_product" name="id_product" maxlength="6" size="4"><br><br>
+		<div class="device-id-row">
+			<label for="id_product">Номер устройства:</label>
+			<div class="device-id-input-wrap">
+				<input type="text" id="id_product" name="id_product" maxlength="6" size="4">
+				<button id="scanBtn" class="qr-icon-badge" type="button" title="Сканировать QR-код">
+					<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<rect x="2" y="2" width="7" height="7" rx="1"></rect>
+						<rect x="5" y="5" width="1" height="1"></rect>
+						<rect x="15" y="2" width="7" height="7" rx="1"></rect>
+						<rect x="18" y="5" width="1" height="1"></rect>
+						<rect x="2" y="15" width="7" height="7" rx="1"></rect>
+						<rect x="5" y="18" width="1" height="1"></rect>
+						<rect x="12" y="12" width="2" height="2"></rect>
+						<rect x="15" y="12" width="2" height="2"></rect>
+						<rect x="12" y="15" width="2" height="2"></rect>
+						<rect x="16" y="16" width="1" height="1"></rect>
+						<rect x="18" y="14" width="2" height="2"></rect>
+						<rect x="20" y="18" width="2" height="2"></rect>
+						<rect x="14" y="20" width="2" height="2"></rect>
+					</svg>
+				</button>
+			</div>
+		</div>
 
 		<label for="model_id">Модель:</label>
 		<select id="model_id" name="model_id">
@@ -703,7 +955,7 @@
 			<option value="H800">H800</option>
 			<option value="H1000">H1000</option>
 			<option value="H1500">H1500</option>
-			<option value="1201">3 Вентел</option>
+			<option value="1201">3 вентилятора</option>
 		</select><br><br>
 
 		<div class="fan-type-group">
@@ -744,20 +996,28 @@
 		<select id="dopColor" name="dopColor">
 			<option value="1">Обычный</option>
 			<option value="2">RGB</option>
-			<option value="3" selected>Обычный регулировка яркости</option>
+			<option value="3" selected>Обычный, регулировка яркости</option>
 		</select><br><br>
 
-		<label for="maxValues">MAX значение:</label><br>
-		<input type="text" name="max1" class="number-input" value="5000">
-		<input type="text" name="max2" class="number-input" value="2500">
-		<input type="text" name="max3" class="number-input" value="1200">
-		<input type="text" name="max4" class="number-input" value="1200"><br><br>
+		<div class="values-group">
+			<label for="max1">MAX значение:</label>
+			<div class="values-row">
+				<input type="text" id="max1" name="max1" class="number-input" value="5000">
+				<input type="text" name="max2" class="number-input" value="2500">
+				<input type="text" name="max3" class="number-input" value="1200">
+				<input type="text" name="max4" class="number-input" value="1200">
+			</div>
+		</div>
 
-		<label for="minValues">MIN значение:</label><br>
-		<input type="text" name="min1" class="number-input" value="900">
-		<input type="text" name="min2" class="number-input" value="550">
-		<input type="text" name="min3" class="number-input" value="650">
-		<input type="text" name="min4" class="number-input" value="650"><br><br>
+		<div class="values-group">
+			<label for="min1">MIN значение:</label>
+			<div class="values-row">
+				<input type="text" id="min1" name="min1" class="number-input" value="900">
+				<input type="text" name="min2" class="number-input" value="550">
+				<input type="text" name="min3" class="number-input" value="650">
+				<input type="text" name="min4" class="number-input" value="650">
+			</div>
+		</div>
 
 		<label for="taim">Время работы помпы в секундах:</label>
 		<input type="text" name="taim" size="3" value="75"><br><br>
@@ -767,6 +1027,140 @@
 
 		<input type="submit" value="Отправить">
 	</form>
+
+	<div class="modal hidden" id="scannerModal">
+		<div class="modal-content">
+			<div class="scanner" id="scanner">
+				<h3>Сканер QR/штрих‑кодов</h3>
+				<video id="video" autoplay playsinline></video>
+				<canvas id="canvas"></canvas>
+				<button id="stopBtn" type="button" disabled>Остановить</button>
+				<div id="output">— нет данных —</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		(async function () {
+			const video = document.getElementById('video');
+			const canvas = document.getElementById('canvas');
+			const ctx = canvas.getContext('2d');
+			const output = document.getElementById('output');
+			const scanBtn = document.getElementById('scanBtn');
+			const stopBtn = document.getElementById('stopBtn');
+			const serialInput = document.getElementById('id_product');
+			const scannerModal = document.getElementById('scannerModal');
+
+			let stream = null;
+			let rafId = null;
+			let detector = null;
+			let useBarcodeDetector = false;
+			let captured = false;
+
+			if ('BarcodeDetector' in window) {
+				try {
+					const supported = await BarcodeDetector.getSupportedFormats();
+					detector = new BarcodeDetector({ formats: supported });
+					useBarcodeDetector = true;
+				} catch (e) {
+					useBarcodeDetector = false;
+				}
+			}
+
+			async function processFrame() {
+				if (!video.videoWidth) {
+					rafId = requestAnimationFrame(processFrame);
+					return;
+				}
+
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+				ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+				try {
+					if (useBarcodeDetector && detector) {
+						const barcodes = await detector.detect(canvas);
+						if (barcodes && barcodes.length) {
+							const value = barcodes[0].rawValue || '';
+							handleDetected(value, barcodes[0].format);
+						} else {
+							output.textContent = '— не найдено —';
+						}
+					} else if (typeof jsQR === 'function') {
+						const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+						const qr = jsQR(imageData.data, imageData.width, imageData.height);
+						if (qr) {
+							handleDetected(qr.data, 'JSQR');
+						} else {
+							output.textContent = '— не найдено —';
+						}
+					} else {
+						output.textContent = 'BarcodeDetector не поддерживается и jsQR не подключён.';
+					}
+				} catch (err) {
+					output.textContent = 'Ошибка: ' + err.message;
+				}
+
+				rafId = requestAnimationFrame(processFrame);
+			}
+
+			function handleDetected(value, label) {
+				if (!value) {
+					output.textContent = '— не найдено —';
+					return;
+				}
+				output.textContent = label + ': ' + value;
+				if (!captured) {
+					captured = true;
+					serialInput.value = value;
+					stopCamera();
+				}
+			}
+
+			async function startCamera() {
+				try {
+					if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+						output.textContent = 'Камера не поддерживается в этом браузере.';
+						return;
+					}
+					captured = false;
+					scannerModal.classList.remove('hidden');
+					stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+					video.srcObject = stream;
+					await video.play();
+					scanBtn.disabled = true;
+					stopBtn.disabled = false;
+					rafId = requestAnimationFrame(processFrame);
+					output.textContent = 'Камера запущена, ищем штрих/QR...';
+				} catch (e) {
+					output.textContent = 'Ошибка доступа к камере: ' + (e.message || e.name);
+				}
+			}
+
+			function stopCamera() {
+				if (rafId) cancelAnimationFrame(rafId);
+				if (stream) {
+					stream.getTracks().forEach(track => track.stop());
+					stream = null;
+				}
+				video.srcObject = null;
+				scanBtn.disabled = false;
+				stopBtn.disabled = true;
+				scannerModal.classList.add('hidden');
+				if (!captured) {
+					output.textContent = 'Камера остановлена.';
+				}
+			}
+
+			scanBtn.addEventListener('click', startCamera);
+			stopBtn.addEventListener('click', stopCamera);
+			scannerModal.addEventListener('click', function (event) {
+				if (event.target === scannerModal) {
+					stopCamera();
+				}
+			});
+		})();
+	</script>
 </body>
 
 </html>
