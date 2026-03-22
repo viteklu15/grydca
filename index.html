@@ -306,6 +306,13 @@
 				gap: 8px;
 			}
 
+			.mod-options,
+			.fan-inline-options {
+				flex-direction: row;
+				flex-wrap: nowrap;
+				gap: 12px;
+			}
+
 			.device-id-row {
 				flex-direction: column;
 				align-items: stretch;
@@ -960,7 +967,7 @@
 
 		<div class="fan-type-group">
 			<label class="fan-type-label">Модификация:</label>
-			<div class="fan-options">
+			<div class="fan-options mod-options">
 				<div class="fan-option">
 					<input type="radio" id="mod_standart" name="mod" value="standart" checked>
 					<label for="mod_standart">Обычный</label>
@@ -975,7 +982,7 @@
 
 		<div class="fan-type-group">
 			<label class="fan-type-label">Тип вентиляторов:</label>
-			<div class="fan-options">
+			<div class="fan-options fan-inline-options">
 				<div class="fan-option">
 					<input type="radio" id="old_fans" name="fan_type" value="star" checked>
 					<label for="old_fans">Старые</label>
