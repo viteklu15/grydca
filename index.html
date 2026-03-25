@@ -1064,6 +1064,63 @@
 			let useBarcodeDetector = false;
 			let captured = false;
 
+			function selectRadioById(id) {
+				const radio = document.getElementById(id);
+				if (!radio) return false;
+				radio.checked = true;
+				radio.dispatchEvent(new Event('change', { bubbles: true }));
+				return true;
+			}
+
+			function parseQrPayload(rawValue) {
+				const value = (rawValue || '').trim();
+				if (!value) return null;
+
+				const parts = value.replace(/;$/, '').split('&').map(part => part.trim());
+				if (parts.length < 4) return null;
+
+				const [serial, modCode, fanCode, kitCode] = parts;
+				return { serial, modCode, fanCode, kitCode };
+			}
+
+			function applyQrPayload(rawValue) {
+				const parsed = parseQrPayload(rawValue);
+				if (!parsed) {
+					serialInput.value = (rawValue || '').trim().slice(0, 6);
+					return false;
+				}
+
+				serialInput.value = parsed.serial;
+
+				const modMap = {
+					'1': 'mod_standart',
+					'2': 'mod_uvlajnitel'
+				};
+				const fanMap = {
+					'1': 'old_fans',
+					'2': 'new_fans',
+					'3': 'fan_ten'
+				};
+
+				if (modMap[parsed.modCode]) {
+					selectRadioById(modMap[parsed.modCode]);
+				}
+				if (fanMap[parsed.fanCode]) {
+					selectRadioById(fanMap[parsed.fanCode]);
+				}
+
+				const kitSelect = document.getElementById('dopColor');
+				if (kitSelect) {
+					const hasOption = Array.from(kitSelect.options).some(option => option.value === parsed.kitCode);
+					if (hasOption) {
+						kitSelect.value = parsed.kitCode;
+						kitSelect.dispatchEvent(new Event('change', { bubbles: true }));
+					}
+				}
+
+				return true;
+			}
+
 			if ('BarcodeDetector' in window) {
 				try {
 					const supported = await BarcodeDetector.getSupportedFormats();
@@ -1119,7 +1176,7 @@
 				output.textContent = label + ': ' + value;
 				if (!captured) {
 					captured = true;
-					serialInput.value = value;
+					applyQrPayload(value);
 					stopCamera();
 				}
 			}
