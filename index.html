@@ -949,6 +949,7 @@
 
 		<label for="model_id">Модель:</label>
 		<select id="model_id" name="model_id">
+			<option value="300">300</option>
 			<option value="600">600</option>
 			<option value="800">800</option>
 			<option value="1000">1000</option>
@@ -1083,14 +1084,69 @@
 				return { serial, modCode, fanCode, kitCode };
 			}
 
+			function detectModelBySerial(serial) {
+				const value = (serial || '').trim().toUpperCase();
+				if (!value) return null;
+
+				const letterPrefixMap = {
+					'H03': '300',
+					'H60': '600',
+					'H80': '800',
+					'H10': '1000',
+					'H12': '1200',
+					'H15': '1500',
+					'H18': '1800',
+					'H20': '2000',
+					'H24': '2400',
+					'H30': '3000',
+					'F60': '600',
+					'F80': '800',
+					'F10': '1000',
+					'F12': '1200',
+					'F15': '1500',
+					'F20': '2000'
+				};
+
+				const digitPrefixMap = {
+					'10': '1000',
+					'12': '1200',
+					'15': '1500',
+					'20': '2000',
+					'24': '2400',
+					'26': 'H26',
+					'30': '3000',
+					'56': '1000',
+					'60': '600',
+					'80': '800'
+				};
+
+				if (/^[A-Z]/.test(value)) {
+					return letterPrefixMap[value.slice(0, 3)] || null;
+				}
+
+				return digitPrefixMap[value.slice(0, 2)] || null;
+			}
+
 			function applyQrPayload(rawValue) {
 				const parsed = parseQrPayload(rawValue);
+				const modelSelect = document.getElementById('model_id');
 				if (!parsed) {
 					serialInput.value = (rawValue || '').trim().slice(0, 6);
+					const detectedModel = detectModelBySerial(serialInput.value);
+					if (detectedModel && modelSelect) {
+						modelSelect.value = detectedModel;
+						modelSelect.dispatchEvent(new Event('change', { bubbles: true }));
+					}
 					return false;
 				}
 
 				serialInput.value = parsed.serial;
+
+				const detectedModel = detectModelBySerial(parsed.serial);
+				if (detectedModel && modelSelect) {
+					modelSelect.value = detectedModel;
+					modelSelect.dispatchEvent(new Event('change', { bubbles: true }));
+				}
 
 				const modMap = {
 					'1': 'mod_standart',
